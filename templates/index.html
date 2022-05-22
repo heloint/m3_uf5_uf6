@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="" content="">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style_index.css') }}">
+    </head>
+    <body background="{{ url_for('static', filename='src/naruto_sasuke.png') }}" >
+        <div class="menu-box">
+            <nav class="menu">
+                <a id="aboutBtn">About the page</a> |
+                <a id="videoBtn" >Greatest songs 2021</a> |
+                <a target="_blank" href="./actividad_10/practica10.html">Read mangas</a></a> |
+                <a target="_blank" href="./actividad_10/practica10.html">Watch animes</a></a> 
+            </nav>
+        </div> 
+
+        <div class="wrap">
+           <form class="search" action = "http://localhost:5000" method = "post">
+              <input name="searchTerm" type="text" class="searchTerm" placeholder="Which anime are you looking for?">
+              <input type="image" class="searchSubmit" src="{{ url_for('static', filename='src/sharingan.png') }}"  alt="Submit"  />
+           </form>
+        </div>
+
+
+        <!-- Trigger/Open The Modal -->
+        <!-- <button id="videoBtn">Open Modal</button> -->
+
+        <!-- The Modal -->
+        <div id="videoModal" class="modal"> 
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="videoClose">&times;</span>
+                <iframe class="popup-video"
+                    src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
+                </iframe>
+              </div>
+        </div>
+
+        <div id="aboutModal" class="modal"> 
+              <!-- Modal content -->
+              <div class="aboutModal-content">
+                <span class="aboutClose">&times;</span>
+                <p>This is an awesome website, built with Python-Flask framework.</br>
+                As well, using a SQLite3 database to handle all the 2001 registers of animes and their 
+                description. </br>
+                To use, just type the name of the anime of your choice and this awesome website will </br>
+                throw you some nice hits.</p>
+              </div>
+        </div>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>    </body>
+</html>
+
