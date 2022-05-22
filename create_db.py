@@ -84,14 +84,13 @@ class DB:
 
     def model_result(self, registers: list[tuple]):
         
-        result = []
+        modeled_output = []
 
         for row in registers:
-            word_list: list[str] = str(row).split(' ') 
-            paragraph = "</br>".join([" ".join(word_list[i:i+16]) for i in range(0,len(word_list),16)])
-            result.append(paragraph)
+            word_list: list[str] = "".join(list(row)).split(' ') 
+            paragraph = "\n".join([" ".join(word_list[i:i+8]) for i in range(0,len(word_list),8)])
+            modeled_output.append(paragraph)
         
-        modeled_output: str = "</br></br>".join(result)
 
         return modeled_output
 

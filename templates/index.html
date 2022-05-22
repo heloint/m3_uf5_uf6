@@ -51,7 +51,9 @@
         
 
         <div id="searchResult" class="searchResult" name="searchResult" >
-            <p>{{name}}</p>
+            {% for content in result %}
+                {{content}}</br></br>
+            {% endfor %}
         </div>
         <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>    </body>
 </html>
