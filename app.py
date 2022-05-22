@@ -24,7 +24,12 @@ def index():
     if request.method == 'POST':
         search_term:  str = request.form['searchTerm']
 
-        return render_template('index.html', name = search_term) 
+#     con = sqlite3.connect("source.db", check_same_thread=False)
+#     cursor = con.cursor()
+#     cursor.execute('desc', search_term) 
+    result = anime.get_query('desc', search_term) 
+#     result = cursor.fetchall()
+    return "</br></br>".join(["".join(list(row)) for row in result]) 
 
 # Main 
 # --------------------------------------------
@@ -32,12 +37,4 @@ if __name__ == '__main__':
     app.run(debug=True)
 # --------------------------------------------
 
-# test = anime.get_query('select desc from animes;')
-# 
-# for row in test:
-#     word_list: list[str] = str(row).split(' ') 
-#     for i, word in enumerate(word_list):
-#         paragraph: list[str] = [for i in range(0,len(word_list),10)]
-# 
-# 
-#         result_rows = [result_spaces[i:i + len(data_spaces)] for i in range(0,len(result_spaces),len(data_spaces))]
+

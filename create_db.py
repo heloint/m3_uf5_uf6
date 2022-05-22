@@ -17,7 +17,7 @@ class DB:
         con = None
 
         try:
-            con = sqlite3.connect(self.db_file)
+            con = sqlite3.connect(self.db_file, check_same_thread=False)
         except Exception as e:
             print(f"{e}\n Connection to database hasn't been established.")
 
@@ -72,24 +72,42 @@ class DB:
         
         self.con.commit()
 
-    def get_query(self, command: str):
+    def get_query(self, column: str, search_term: tuple):
         
-        self.cur.execute(command)
-
-        if not self.cur.execute(command):
-            raise Exception('ERROR -> Faulty structured query.')
+        self.cur.execute(f"SELECT {column} FROM animes WHERE title LIKE ?", (f"%{search_term}%", ))
+#         if not self.cur.execute(command):
+#             raise Exception('ERROR -> Faulty structured query.')
 
         registers = self.cur.fetchall()
 
         return registers
 
+    def model_result(self, registers: list[tuple]):
+        
+        result = []
+
+        for row in registers:
+            word_list: list[str] = str(row).split(' ') 
+            paragraph = "</br>".join([" ".join(word_list[i:i+16]) for i in range(0,len(word_list),16)])
+            result.append(paragraph)
+        
+        modeled_output: str = "</br></br>".join(result)
+
+        return modeled_output
+
+
 if __name__ == "__main__":
     anime = DB('source.db')
+    test = anime.get_query('select desc from animes;',())
+    a = anime.model_result(test)
+    print(a)
+    
 # anime.create_table('animes', id='integer', title='text', desc='text')
 # anime.add_to_table('animes', id='1', title='test', desc='test')
-    anime.fetch_table_from_csv('test.csv', 
-                               'animes', 
-                               id='integer',
-                               title='text',
-                               desc='text')
+#     anime.fetch_table_from_csv('test.csv', 
+#                                'animes', 
+#                                id='integer',
+#                                title='text',
+#                                desc='text')
+# 
 
