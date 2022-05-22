@@ -40,6 +40,12 @@
         </div>
 
         <script>
+
+        function stopVideo(modal) {
+          var currentIframe = modal.querySelector('.modal-content > iframe');
+          currentIframe.src = currentIframe.src;
+        }
+
         // Get the modal
         var modal = document.getElementById("myModal");
 
