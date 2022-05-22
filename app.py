@@ -10,6 +10,7 @@ module_name: str = __name__
 app: Flask = Flask(module_name)
 # --------------------------------------------
 
+anime = db.DB('source.db')
 
 
 
@@ -27,7 +28,16 @@ def index():
 
 # Main 
 # --------------------------------------------
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
 # --------------------------------------------
 
+test = anime.get_query('select desc from animes;')
+
+for row in test:
+    word_list: list[str] = str(row).split(' ') 
+    for i, word in enumerate(word_list):
+        paragraph: list[str] = [for i in range(0,len(word_list),10)]
+
+
+        result_rows = [result_spaces[i:i + len(data_spaces)] for i in range(0,len(result_spaces),len(data_spaces))]
