@@ -75,9 +75,9 @@ class DB:
 anime = DB('source.db')
 # anime.create_table('animes', id='integer', title='text', desc='text')
 # anime.add_to_table('animes', id='1', title='test', desc='test')
-# anime.fetch_table_from_csv('test.csv', 
-#                            'animes', 
-#                            id='integer',
-#                            title='text',
-#                            desc='text')
+anime.fetch_table_from_csv('test.csv', 
+                           'animes', 
+                           id='integer',
+                           title='text',
+                           desc='text')
 
