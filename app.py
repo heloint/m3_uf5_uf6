@@ -1,4 +1,5 @@
 import sqlite3
+import re
 from pathlib import Path
 from flask import Flask, Response, render_template, jsonify, request
 
@@ -17,10 +18,11 @@ def index():
     if request.method == 'POST':
         search_term:  str = request.form['searchTerm']
 
-    return f"{search_term}"
+        return render_template('index.html', name = search_term) 
 
 # Main 
 # --------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)
 # --------------------------------------------
+:
