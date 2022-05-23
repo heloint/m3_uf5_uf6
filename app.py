@@ -68,7 +68,3 @@ def index():
 if __name__ == '__main__':
     app.run(debug=True)
 # --------------------------------------------
-
-# a = index()
-# for i in a:
-#     print(i)
