@@ -21,11 +21,12 @@ def index():
     if request.method == 'POST':
         search_term:  str = request.form['searchTerm']
     
+    headers: list[str] = ["".join(list(title)) for title in anime.get_query('title', search_term)]
+    content: list[tuple] = anime.get_query('desc', search_term) 
+    modeled_output: str = anime.model_result(content)
 
-    result = anime.get_query('desc', search_term) 
-    modeled_output = anime.model_result(result)
-
-    return render_template('index.html', result = modeled_output)
+    data: list[dict] = [{header:modeled_output[i] for i, header in enumerate(headers)}]
+    return render_template('index.html', data=data)
 
 # Main 
 # --------------------------------------------

@@ -99,7 +99,7 @@ class DB:
 
         for row in registers:
             word_list: list[str] = "".join(list(row)).split(' ') 
-            paragraph: str = "\n".join([" ".join(word_list[i:i+8]) for i in range(0,len(word_list),8)])
+            paragraph: str = " ".join([" ".join(word_list[i:i+8]) for i in range(0,len(word_list),8)])
             modeled_output.append(paragraph)
         
         return modeled_output

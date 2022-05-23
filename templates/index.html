@@ -51,8 +51,10 @@
         
 
         <div id="searchResult" class="searchResult" name="searchResult" >
-            {% for content in result %}
-                <p>{{content}}</br></br></p>
+            {% for dict_item in data  %}
+            {% for key,value in dict_item.items() %}
+                <p><b><u>{{key}}</u></b></br></br>{{value}}</br></br></p>
+            {% endfor %}
             {% endfor %}
         </div>
         <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>    </body>
