@@ -10,7 +10,7 @@ module_name: str = __name__
 app: Flask = Flask(module_name)
 # --------------------------------------------
 
-anime: db.DB = db.DB('source.db')
+anime: db.DB = db.DB('./db_src/source.db')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -20,6 +20,7 @@ def index():
 
     if request.method == 'POST':
         search_term:  str = request.form['searchTerm']
+    
 
     result = anime.get_query('desc', search_term) 
     modeled_output = anime.model_result(result)

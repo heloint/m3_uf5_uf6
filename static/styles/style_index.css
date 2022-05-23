@@ -157,13 +157,22 @@ html, body { height: 100%;
     left: 5%;
 }
 
+.searchResult:empty{
+    border: None;
+}
+
 .searchResult{
     text-align: center;
     padding: 1rem;
     position: absolute;
     top: 40%;
     left: 45%;
+}
+
+.searchResult p{
+    padding: 1rem;
+    margin-left: 3rem;
     border: 1px solid black;
     border-radius: 15px 15px 15px 15px;
-    width: 50%;
+    width: 80%;
 }

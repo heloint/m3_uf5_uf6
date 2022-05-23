@@ -109,7 +109,7 @@ if __name__ == "__main__":
         for the Flask web app . . . 
     '''
 
-    anime: DB = DB('source.db')
+    anime: DB = DB('./db_src/source.db')
 #     anime.create_table('animes', id='integer', title='text', desc='text')
 #     anime.add_to_table('animes', id='1', title='test', desc='test')
 #     test: list[tuple] = anime.get_query('select desc from animes;',())
