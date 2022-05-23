@@ -78,12 +78,12 @@ class DB:
         self.con.commit()
 
 
-    def get_query(self, column: str, search_term: tuple) -> list[tuple]:
+    def get_query(self, column: str, search_term: str) -> list[tuple]:
         ''' Get's as args the "to be queried" column name, and the search term where the
             one of the column value supposed to be similar.
         '''
-
-        self.cur.execute(f"SELECT {column} FROM animes WHERE title LIKE ?", (f"%{search_term}%", ))
+                                                    # Makes title and search_term uppercase to be case insensitive.
+        self.cur.execute(f"SELECT {column} FROM animes WHERE upper(title) LIKE ?", (f"%{search_term.upper()}%", ))
 
         registers: list[tuple] = self.cur.fetchall()
 
