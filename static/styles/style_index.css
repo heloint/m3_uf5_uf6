@@ -158,6 +158,8 @@ html, body { height: 100%;
 }
 
 .searchResult{
+    text-align: center;
+    padding: 1rem;
     position: absolute;
     top: 40%;
     left: 45%;

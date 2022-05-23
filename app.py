@@ -10,8 +10,7 @@ module_name: str = __name__
 app: Flask = Flask(module_name)
 # --------------------------------------------
 
-anime = db.DB('source.db')
-
+anime: db.DB = db.DB('source.db')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -23,16 +22,12 @@ def index():
         search_term:  str = request.form['searchTerm']
 
     result = anime.get_query('desc', search_term) 
-#     result = anime.get_query('desc', 'Cowboy') 
     modeled_output = anime.model_result(result)
 
     return render_template('index.html', result = modeled_output)
-#     return modeled_output
 
 # Main 
 # --------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)
 # --------------------------------------------
-# test = index()
-# print(test)
