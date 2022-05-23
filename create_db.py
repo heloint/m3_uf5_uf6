@@ -114,7 +114,7 @@ if __name__ == "__main__":
 #     anime.add_to_table('animes', id='1', title='test', desc='test')
 #     test: list[tuple] = anime.get_query('select desc from animes;',())
 #     a = anime.model_result(test)
-    anime.fetch_table_from_csv('animes_src.csv', 
+    anime.fetch_table_from_csv('db_src/animes_src.csv', 
                                'animes', 
                                id='integer',
                                title='text',
