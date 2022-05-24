@@ -79,7 +79,7 @@ class DB:
 
 
     def get_query(self, column: str, search_term: str) -> list[tuple]:
-        ''' Get's as args the "to be queried" column name, and the search term where the
+        ''' Gets as args the "to be queried" column name, and the search term where the
             one of the column value supposed to be similar.
         '''
                                                     # Makes title and search_term uppercase to be case insensitive.
