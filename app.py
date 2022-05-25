@@ -1,8 +1,7 @@
 import sqlite3
 import re
 import create_db as db
-from pathlib import Path
-from flask import Flask, Response, render_template, jsonify, request
+from flask import Flask, render_template, request
 
 # Flask init
 # --------------------------------------------
@@ -24,8 +23,6 @@ def get_headers(keywords: str) -> list[str]:
         titles: list[str] = ["".join(list(title)) for title in anime.get_query('title', keyword)]
         headers += titles 
 
-    headers = list(set(headers)) 
-
     return headers
 
 
@@ -41,9 +38,19 @@ def get_content(keywords: str) -> list[str]:
         data: list[str] = ["".join(list(title)) for title in anime.get_query('desc', keyword)]
         contents += data
 
-    contents = list(set(contents)) 
-
     return contents
+
+def remove_duplicates(source_data: list[dict]) -> list[dict]:
+    
+    collector: list[str] = []
+    data: dict = {}
+    
+    for key, value in source_data[0].items():
+        if value not in collector:
+            collector.append(value)
+            data[key] = value
+
+    return [data]
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -55,12 +62,19 @@ def index():
     if request.method == 'POST':
         search_term:  str = request.form['searchTerm']
     
-    headers = get_headers(search_term) 
-    content = get_content(search_term) 
+    headers: list[str] = get_headers(search_term) 
+    content: list[str] = get_content(search_term) 
+
+    if not headers or not content:
+        return render_template('index.html', data = [{"Ooops ... Sorry !!!":"We couldn't find anything similar to what you wanted. Please try to re-phrase your search."}])
+
     modeled_output: list[str] = anime.model_result(content)
 
     data: list[dict] = [{header:modeled_output[i] for i, header in enumerate(headers)}]
-    return render_template('index.html', data=data)
+    data = remove_duplicates(data)
+
+
+    return render_template('index.html', data = data)
 
 
 # Main 
