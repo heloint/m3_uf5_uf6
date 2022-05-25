@@ -1,7 +1,7 @@
 import utils
 import sqlite3
 import re
-import create_db as db
+import database as db
 from flask import Flask, render_template, request
 
 # Flask init

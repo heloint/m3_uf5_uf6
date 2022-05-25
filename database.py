@@ -41,8 +41,14 @@ class DB:
 
         self.con.commit()
 
+    def drop_table(self, table_name: str) -> None:
+        'Drops the table which is received as a parameter.'
+        
+        self.cur.execute(f"DROP TABLE {table_name};")
+        self.con.commit()
 
-    def add_to_table(self, table_name, **columns, ) -> None:
+
+    def insert_into_table(self, table_name, **columns, ) -> None:
         ''' Receives the name of the target table, then a series of the target columns
             assigned with the desired value.
         '''
@@ -104,6 +110,10 @@ class DB:
         
         return modeled_output
 
+    
+
+        
+
 if __name__ == "__main__":
     ''' Only for the first time to be executed to build the database
         for the Flask web app . . . 
@@ -111,7 +121,7 @@ if __name__ == "__main__":
 
     anime: DB = DB('./db_src/source.db')
 #     anime.create_table('animes', id='integer', title='text', desc='text')
-#     anime.add_to_table('animes', id='1', title='test', desc='test')
+#     anime.insert_into_table('animes', id='1', title='test', desc='test')
 #     test: list[tuple] = anime.get_query('select desc from animes;',())
 #     a = anime.model_result(test)
     anime.fetch_table_from_csv('db_src/animes_src.csv', 
