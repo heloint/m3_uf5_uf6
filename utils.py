@@ -32,8 +32,20 @@ def get_content(db_object: db.DB, keywords: str) -> list[str]:
 
     return contents
 
+def sort_dictionary(data: dict):
+    ''' Sorts the received dictionary by the keys.
+    '''
+    keys: list[str] = sorted(data)
+    sorted_dict: dict = {key:data[key] for key in keys}
+
+    return sorted_dict
+
+
 def remove_duplicates(source_data: list[dict]) -> list[dict]:
-    
+    ''' Removes the duplicates from the received dictionary,
+        and sorts the result by the keys using "sort_dictionary()."
+    '''
+
     collector: list[str] = []
     data: dict = {}
     
@@ -41,5 +53,7 @@ def remove_duplicates(source_data: list[dict]) -> list[dict]:
         if value not in collector:
             collector.append(value)
             data[key] = value
+    
+    data = sort_dictionary(data)
 
     return [data]
