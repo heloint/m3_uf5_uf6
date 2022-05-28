@@ -1,3 +1,4 @@
+---
 # Anime Searcher
 
 Version compatibility: > Python 3.8 
